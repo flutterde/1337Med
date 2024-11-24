@@ -17,7 +17,8 @@ cd ~
 nano .bashrc
 # and Past this:
 alias cppcreate='/PATH_TO_COMMAND/cppcreate'
-
+# Start using it:
+cppcreate -ch MyClassName
 ```
 
 ## Flags
