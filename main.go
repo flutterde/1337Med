@@ -9,7 +9,7 @@ import (
 
 func createHeader(name string) {
 	log.Println("Creating Header " + name + " file...")
-	fileName := strings.ToLower(name) + ".hpp"
+	fileName := name + ".hpp"
 	file, err := os.Create(fileName)
 	if err != nil {
 		log.Fatalf("Error creating file: %v", err)
@@ -25,10 +25,10 @@ class %s
 	private:
 
 	public:
-		%s();
-		%s(const %s& inst);
-		%s&	operator=(const %s& inst);
-		~%s();
+		%s(void); // Default constructor
+		%s(const %s& obj); // Copy constructor
+		%s&	operator=(const %s& obj); // Copy assigment operator
+		~%s(); // Destructor
 
 };
 
@@ -55,7 +55,7 @@ class %s
 func createClass(name string) {
 
 	log.Println("Creating Class " + name + " file...")
-	fileName := strings.ToLower(name) + ".cpp"
+	fileName := name + ".cpp"
 	file, err := os.Create(fileName)
 	if err != nil {
 		log.Fatalf("Error creating file: %v", err)
@@ -73,22 +73,22 @@ func createClass(name string) {
 	std::cout << "%s Destructor called" << std::endl;
 }
 
-%s::%s(const %s& inst)
+%s::%s(const %s& obj)
 {
 	std::cout << "%s Copy constructor called" << std::endl;
 }
 
-%s& %s::operator=(const %s& inst)
+%s& %s::operator=(const %s& obj)
 {
 	std::cout << "%s Copy assignment operator called" << std::endl;
-	if (this != &inst)
+	if (this != &obj)
 	{
 		// Add any assignment logic here
 	}
 	return (*this);
 }
 `, 
-	strings.ToUpper(name),
+	name,
 	name,
 	name,
 	strings.Title(name),
@@ -101,6 +101,7 @@ func createClass(name string) {
 	name,
 	name,
 	strings.Title(name),
+	name,
 	name)
 
 	_, err = file.WriteString(classContent)
