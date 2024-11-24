@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"goreplace/api"
 )
 
 func createHeader(name string) {
@@ -118,16 +119,28 @@ func main() {
 		os.Exit(1)
 	}
 	flags := os.Args[1]
-
+	if (flags == "-lt") {
+		var name string
+		if (len((os.Args)) > 2) {
+			name = os.Args[2]
+		} else {name = os.Getenv("USER")}
+			res, err := api.GetLogTime(name)
+			if err != nil {
+				log.Fatalf("Error While getting your logtime: %v\n", err); os.Exit(1)
+			} else {
+				fmt.Println("Your log time is", res); os.Exit(0)
+			}
+	}
 	if flags == "-h" {
-		fmt.Println("-ch	Create Class + Header file\n-c	Create Class only")
+		fmt.Println("-ch	Create Class + Header file\n-c	Create Class only\n-lt	Get Log time")
 		os.Exit(0)
 	}
 	if (len(os.Args) < 3) {
 		log.Fatal("Run the command like that: cppreate -ch MyClass"); os.Exit(1)
 	}
 	fileName := os.Args[2]
-	if flags == "" || fileName == "" {
+	if (flags == "" || (flags == "-ch" && fileName == "")) {
+
 		log.Fatal("Run the command like that: cppreate -ch MyClass"); os.Exit(1)
 	} else if flags == "-ch" {
 		createClass(fileName)
@@ -135,4 +148,5 @@ func main() {
 	} else if flags == "-c" {
 		createClass(fileName)
 	}
+
 }
