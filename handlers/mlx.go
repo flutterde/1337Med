@@ -69,6 +69,7 @@ func	MlxHandler() (int) {
 	if (err != nil) {
 		log.Println(err); os.Exit(1)
 	}
+	os.Remove(path + "/MLX.zip")
 	fmt.Println("Should be Good. check " + path + " and Start building something good")
 	return (0)
 }
