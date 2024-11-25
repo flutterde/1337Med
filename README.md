@@ -24,9 +24,10 @@ cppcreate -ch MyClassName
 ## Flags
 
 ```
--h	Help
--ch	Create Class and it Header file
--c	Create Class only
+-h		Help
+-ch		Create Class and it Header file
+-c		Create Class only
+-mlx	install MLX
 
 ```
 

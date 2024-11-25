@@ -6,6 +6,7 @@ import (
 	"os"
 	"strings"
 	"goreplace/api"
+	"goreplace/handlers"
 )
 
 func createHeader(name string) {
@@ -114,7 +115,8 @@ func createClass(name string) {
 }
 
 func main() {
-	if len(os.Args) < 2 {
+	argsLen := len(os.Args)
+	if argsLen < 2 {
 		log.Println("please set a flag")
 		os.Exit(1)
 	}
@@ -130,12 +132,17 @@ func main() {
 			} else {
 				fmt.Println("Your log time is", res); os.Exit(0)
 			}
+	} else if (flags == "-mlx") {
+		rlt := handlers.MlxHandler()
+		if rlt == -1 {
+			os.Exit(1)
+		} else {os.Exit(0)}
 	}
 	if flags == "-h" {
-		fmt.Println("-ch	Create Class + Header file\n-c	Create Class only\n-lt	Get Log time")
+		fmt.Println("-ch	Create Class + Header file\n-c	Create Class only\n-lt	Get Log time\n-mlx	install MLX")
 		os.Exit(0)
 	}
-	if (len(os.Args) < 3) {
+	if (argsLen < 3) {
 		log.Fatal("Run the command like that: cppreate -ch MyClass"); os.Exit(1)
 	}
 	fileName := os.Args[2]

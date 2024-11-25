@@ -1,3 +1,5 @@
 *.cpp
 *.hpp
 cppcreate
+*.zip
+MLX/

@@ -5,4 +5,5 @@ all:
 	go build -o $(NAME) main.go 
 
 fclean:
-	rm $(NAME)
+	rm -rf $(NAME)
+re: fclean all 
