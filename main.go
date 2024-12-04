@@ -29,7 +29,7 @@ class %s
 	public:
 		%s(void); // Default constructor
 		%s(const %s& obj); // Copy constructor
-		%s&	operator=(const %s& obj); // Copy assigment operator
+		%s&	operator=(const %s& obj); // Copy assignment operator
 		~%s(); // Destructor
 
 };
@@ -78,6 +78,7 @@ func createClass(name string) {
 %s::%s(const %s& obj)
 {
 	std::cout << "%s Copy constructor called" << std::endl;
+	*this = obj;
 }
 
 %s& %s::operator=(const %s& obj)
