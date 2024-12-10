@@ -3,8 +3,8 @@ A Tool to automate the process of creating c++ Class + it header file
 # Usage
 first you need go on your system, the :
 ```bash
-git clone https://github.com/flutterde/cppcreate.git
-cd cppcreate
+git clone https://github.com/flutterde/1337Med.git
+cd 1337Med
 make
 ```
 
@@ -16,9 +16,9 @@ cd ~
 # edit .bashrc file
 nano .bashrc
 # and Past this:
-alias cppcreate='/PATH_TO_COMMAND/cppcreate'
+alias 1337Med='/PATH_TO_COMMAND/1337Med'
 # Start using it:
-cppcreate -ch MyClassName
+1337Med -ch MyClassName
 ```
 
 ## Flags

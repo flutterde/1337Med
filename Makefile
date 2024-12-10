@@ -1,5 +1,5 @@
 
-NAME=cppcreate
+NAME=1337Med
 
 all:
 	go build -o $(NAME) main.go 

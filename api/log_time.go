@@ -8,7 +8,6 @@ import (
 	"time"
 )
 
-// LogTimeResponse represents the structure of the API response.
 type LogTimeResponse struct {
 	HydraMember []struct {
 		TotalHours int `json:"totalHours"`
@@ -17,8 +16,14 @@ type LogTimeResponse struct {
 
 func GetLogTime(name string) (int, error) {
 	now := time.Now()
-	startDate := time.Date(now.Year(), now.Month()-1, 28, 0, 0, 0, 0, now.Location())
-	endDate := time.Date(now.Year(), now.Month(), 28, 0, 0, 0, 0, now.Location())
+	var startDate, endDate time.Time
+	if now.Day() > 28 {
+		startDate = time.Date(now.Year(), now.Month(), 29, 0, 0, 0, 0, now.Location())
+		endDate = time.Date(now.Year(), now.Month()+1, 0, 0, 0, 0, 0, now.Location())
+	} else {
+		startDate = time.Date(now.Year(), now.Month()-1, 29, 0, 0, 0, 0, now.Location())
+		endDate = time.Date(now.Year(), now.Month(), 28, 0, 0, 0, 0, now.Location())
+	}
 	startDateStr := startDate.Format("2006-01-02")
 	endDateStr := endDate.Format("2006-01-02")
 	requestBody := map[string]string{
@@ -36,6 +41,7 @@ func GetLogTime(name string) (int, error) {
 		return 0, fmt.Errorf("failed to create request: %v", err)
 	}
 	req.Header.Set("Content-Type", "application/json")
+
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
